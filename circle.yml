@@ -1,0 +1,11 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build --tag sicp-exercise-answers .
+
+test:
+  override:
+    - docker run sicp-exercise-answers
