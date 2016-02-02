@@ -1,8 +1,5 @@
 FROM andrewshawcare/mit-scheme
 
-COPY ./src /src
+COPY . .
 
-WORKDIR /src
-
-ENTRYPOINT ["scm"]
-CMD ["-f", "assert.scm", "-f", "answers.scm"]
+ENTRYPOINT ["./docker-entrypoint.sh"]

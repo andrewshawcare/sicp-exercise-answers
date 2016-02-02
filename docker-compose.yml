@@ -1,4 +1,5 @@
 sicp-exercise-answers:
   build: .
   volumes:
-    - './src:/src'
+    - './answers.scm:/answers.scm'
+    - './docker-entrypoint.sh:/docker-entrypoint.sh'
