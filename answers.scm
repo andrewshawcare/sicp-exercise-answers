@@ -86,3 +86,11 @@
   (=
     41
     (sum-of-squares-of-largest-two-of-three 3 4 5)))
+
+(define (a-plus-abs-b a b)
+  ((if (> b 0) + -) a b)
+)
+(assert "Exercise 1.4"
+  (=
+    (a-plus-abs-b a b)
+    7))
