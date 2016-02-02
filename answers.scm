@@ -94,3 +94,25 @@
   (=
     (a-plus-abs-b a b)
     7))
+
+(define (p) (p))
+(define (test x y)
+  (if (= x 0) 0 (y)))
+(assert "Exercise 1.5"
+  (=
+    (test 0 p)
+    0
+    )
+)
+
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause) (else else-clause)))
+(define x 0)
+
+(assert "Exercise 1.6"
+  (and
+    (= (new-if (= 2 3) 0 5) 5)
+    (= (new-if (= 1 1) 0 5) 0)
+    (= (new-if (= 1 1) x (set! x 1)) 1)
+  )
+)
