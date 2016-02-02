@@ -1,0 +1,4 @@
+sicp-exercise-answers:
+  build: .
+  volumes:
+    - './src:/src'
