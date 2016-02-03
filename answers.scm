@@ -141,6 +141,28 @@
   (let ((tolerance 0.001))
     (and
       (acceptable-square? 0.00000000001 tolerance)
-      (acceptable-square? 1000000000000 tolerance))
-  )
-)
+      (acceptable-square? 1000000000000 tolerance))))
+
+(define (cbrt-improve guess x)
+  (/ (+ (/ x (square guess)) (* 2 guess)) 3))
+
+(define (cbrt-good-enough? guess x)
+  (< (abs (- 1 (/ (expt guess 3) x))) 0.001))
+
+(define (cbrt-iter guess x)
+  (if (cbrt-good-enough? guess x)
+    guess
+    (cbrt-iter (cbrt-improve guess x) x)))
+
+(define (cbrt x)
+  (cbrt-iter 1.0 x))
+
+(define (acceptable-cube? x tolerance)
+  (< (abs (- 1 (/ (expt (cbrt x) 3) x))) tolerance))
+
+(assert "Exercise 1.7"
+  (let ((tolerance 0.001))
+    (and
+      (acceptable-cube? 27 tolerance)
+      (acceptable-cube? 0.00000000001 tolerance)
+      (acceptable-cube? 1000000000000 tolerance))))
