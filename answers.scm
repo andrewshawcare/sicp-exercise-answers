@@ -217,3 +217,31 @@
     (= (fr 5) (fi 5) 25)
   )
 )
+
+(define (pascals-triangle row column)
+  (cond
+    ((or (= row column) (= column 1)) 1)
+    (else
+      (+
+        (pascals-triangle (- row 1) (- column 1))
+        (pascals-triangle (- row 1) column)))))
+
+(assert "Exercise 1.12"
+  (and
+    (= (pascals-triangle 1 1) 1)
+    (= (pascals-triangle 2 1) 1)
+    (= (pascals-triangle 2 2) 1)
+    (= (pascals-triangle 3 1) 1)
+    (= (pascals-triangle 3 2) 2)
+    (= (pascals-triangle 3 3) 1)
+    (= (pascals-triangle 4 1) 1)
+    (= (pascals-triangle 4 2) 3)
+    (= (pascals-triangle 4 3) 3)
+    (= (pascals-triangle 4 4) 1)
+    (= (pascals-triangle 5 1) 1)
+    (= (pascals-triangle 5 2) 4)
+    (= (pascals-triangle 5 3) 6)
+    (= (pascals-triangle 5 4) 4)
+    (= (pascals-triangle 5 5) 1)
+  )
+)
