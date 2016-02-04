@@ -160,9 +160,60 @@
 (define (acceptable-cube? x tolerance)
   (< (abs (- 1 (/ (expt (cbrt x) 3) x))) tolerance))
 
-(assert "Exercise 1.7"
+(assert "Exercise 1.8"
   (let ((tolerance 0.001))
     (and
       (acceptable-cube? 27 tolerance)
       (acceptable-cube? 0.00000000001 tolerance)
       (acceptable-cube? 1000000000000 tolerance))))
+
+(define (A x y)
+  (cond
+    ((= y 0) 0)
+    ((= x 0) (* 2 y))
+    ((= y 1) 2)
+    (else (A (- x 1) (A x (- y 1))))))
+
+(let ((n 5))
+  (display (A 0 n))
+  (newline)
+  (display (A 1 n))
+  (newline)
+  (display (A 2 n))
+  (newline)
+)
+
+(assert "Exercise 1.10"
+  (and
+    (= (A 1 10) 1024)
+    (= (A 2 4) 65536)
+    (= (A 3 3) 65536)
+  )
+)
+
+(define (fr n)
+  (cond
+    ((< n 3) n)
+    (else
+      (+
+        (fr (- n 1))
+        (* 2 (fr (- n 2)))
+        (* 3 (fr (- n 3)))))))
+
+(define (fi-iter n c fn-1 fn-2 fn-3)
+  (cond
+    ((< n 3) n)
+    ((= n c) fn-1)
+    (else (fi-iter n (+ c 1) (+ fn-1 (* 2 fn-2) (* 3 fn-3)) fn-1 fn-2))))
+
+(define (fi n)
+  (fi-iter n 2 2 1 0))
+
+(assert "Exercise 1.11"
+  (and
+    (= (fr 2) (fi 2) 2)
+    (= (fr 3) (fi 3) 4)
+    (= (fr 4) (fi 4) 11)
+    (= (fr 5) (fi 5) 25)
+  )
+)
